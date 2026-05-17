@@ -24,6 +24,8 @@ class BaseAgent:
                     "max_tokens": self.config.max_tokens,
                 },
             )
+            if resp.status_code != 200:
+                print(f"[ERROR] API returned {resp.status_code}: {resp.text}")
             resp.raise_for_status()
             content = resp.json()["choices"][0]["message"]["content"]
             try:
